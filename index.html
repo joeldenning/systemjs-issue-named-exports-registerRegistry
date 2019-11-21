@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SystemJS Issue</title>
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "named-thing": "./named-thing.js"
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.1.4/dist/system.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.1.4/dist/extras/amd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.1.4/dist/extras/named-register.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs@6.1.4/dist/extras/named-exports.js"></script>
+</head>
+<body>
+  <script>
+    (async () => {
+      let namedThing = await System.import('named-thing')
+      console.log('imported', namedThing)
+      namedThing = await System.import('named-thing')
+      console.log('second import', namedThing)
+    })()
+  </script>
+</body>
+</html>
